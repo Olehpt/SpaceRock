@@ -4,7 +4,7 @@ public class RayCaster : MonoBehaviour
     public float distance = 3f;
     public LayerMask interactLayer;
     private IIntractable currentObject = null;
-
+    public UImanager uiManager;
     void Update()
     {
         Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f));
@@ -17,7 +17,8 @@ public class RayCaster : MonoBehaviour
             {
                 Debug.Log("Raycaster looks at interactable object");
                 currentObject = interactable;
-                //hint logic
+
+                uiManager.ShowHint();
             }
             if (Input.GetKey(KeyCode.E))
             {
@@ -27,6 +28,7 @@ public class RayCaster : MonoBehaviour
         else
         {
             currentObject = null;
+            uiManager.HideHint();
         }
     }
 }
