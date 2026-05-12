@@ -18,5 +18,11 @@ public class Navigation : MonoBehaviour, IIntractable
         Debug.Log("Back button clicked");
         uiManager.CloseMenu();
     }
+    public void LoadLevel(int levelIndex)
+    {
+        Debug.Log("Load level button clicked: " + levelIndex);
+        uiManager.CloseMenu();
+        SceneManager.LoadScene(levelIndex);
+    }
 }
 
