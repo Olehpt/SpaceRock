@@ -4,6 +4,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     int itemAmount = 0;
+    int nonSavedItemAmount = 0;
     private void Awake()
     {
         if (Instance == null)
@@ -25,8 +26,8 @@ public class GameManager : MonoBehaviour
     }
     public void AddItem(int i = 1)
     {
-        itemAmount += i;
-        Debug.Log("Item added. Total items: " + itemAmount);
+        nonSavedItemAmount += i;
+        Debug.Log("Item added");
     }
     public void LoadGame()
     {
@@ -36,6 +37,8 @@ public class GameManager : MonoBehaviour
     }
     public void SaveGame()
     {
+        itemAmount += nonSavedItemAmount;
+        nonSavedItemAmount = 0;
         SaveManager.Save(itemAmount);
         Debug.Log("Game saved. Total items: " + itemAmount);
     }
@@ -44,6 +47,10 @@ public class GameManager : MonoBehaviour
         itemAmount = 0;
         SaveManager.ResetSave();
         Debug.Log("Game reset. Total items: " + itemAmount);
+    }
+    public void ResetTempProgress()
+    {
+        nonSavedItemAmount = 0;
     }
 }
 

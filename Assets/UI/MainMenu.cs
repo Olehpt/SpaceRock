@@ -36,4 +36,5 @@ public class MainMenu : MonoBehaviour
         Debug.Log("Reset save button clicked");
         GameManager.Instance.ResetGame();
     }
+
 }

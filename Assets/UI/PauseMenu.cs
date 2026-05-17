@@ -16,8 +16,8 @@ public class PauseMenu : MonoBehaviour
     public void Quit()
     {
         Debug.Log("Quit to main menu button clicked");
+        GameManager.Instance.ResetTempProgress();
         Time.timeScale = 1f;
-        GameManager.Instance.SaveGame();
         SceneManager.LoadScene(0);
     }
 }
