@@ -24,4 +24,16 @@ public class SaveManager : MonoBehaviour
 
         return new SaveData();
     }
+    public static void ResetSave()
+    {
+        if (File.Exists(path))
+        {
+            File.Delete(path);
+            Debug.Log("Save deleted");
+        }
+        else
+        {
+            Debug.Log("Save file does not exist");
+        }
+    }
 }

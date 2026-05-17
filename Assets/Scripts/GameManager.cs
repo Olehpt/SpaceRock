@@ -39,5 +39,11 @@ public class GameManager : MonoBehaviour
         SaveManager.Save(itemAmount);
         Debug.Log("Game saved. Total items: " + itemAmount);
     }
+    public void ResetGame()
+    {
+        itemAmount = 0;
+        SaveManager.ResetSave();
+        Debug.Log("Game reset. Total items: " + itemAmount);
+    }
 }
 
