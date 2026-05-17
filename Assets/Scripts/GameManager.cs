@@ -52,5 +52,13 @@ public class GameManager : MonoBehaviour
     {
         nonSavedItemAmount = 0;
     }
+    public int GetItemAmount()
+    {
+        return itemAmount;
+    }
+    public int GetNonSavedItemAmount()
+    {
+        return nonSavedItemAmount;
+    }
 }
 

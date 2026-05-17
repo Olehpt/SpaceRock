@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using TMPro;
 public class UImanager : MonoBehaviour
 {
     GameObject currentMenu = null;
@@ -7,6 +7,8 @@ public class UImanager : MonoBehaviour
     public GameObject UI;
     public GameObject Hint;
     public GameObject NavigationUI;
+    public GameObject InventoryUI;
+    public TMP_Text counterItems, counterPickedUp;
     void UnlockCursor()
     {
         Cursor.lockState = CursorLockMode.None;
@@ -22,6 +24,7 @@ public class UImanager : MonoBehaviour
         PauseMenu.SetActive(false);
         UI.SetActive(true);
         Hint.SetActive(false);
+        InventoryUI.SetActive(false);
         NavigationUI.SetActive(false);
     }
     void Update()
@@ -36,6 +39,12 @@ public class UImanager : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.Escape))
         {
             OpenMenu(PauseMenu);
+        }
+        else if (Input.GetKeyDown(KeyCode.I))
+        {
+            OpenMenu(InventoryUI);
+            counterItems.text = GameManager.Instance.GetItemAmount().ToString();
+            counterPickedUp.text = GameManager.Instance.GetNonSavedItemAmount().ToString();
         }
     }
     public void OpenMenu(GameObject menu)
