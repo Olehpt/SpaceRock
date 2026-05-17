@@ -21,11 +21,23 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         Debug.Log("GameManager started");
+        LoadGame();
     }
-    public void AddItem()
+    public void AddItem(int i = 1)
     {
-        itemAmount++;
+        itemAmount += i;
         Debug.Log("Item added. Total items: " + itemAmount);
+    }
+    public void LoadGame()
+    {
+        SaveData data = SaveManager.Load();
+        itemAmount = data.itemCount;
+        Debug.Log("Game loaded. Total items: " + itemAmount);
+    }
+    public void SaveGame()
+    {
+        SaveManager.Save(itemAmount);
+        Debug.Log("Game saved. Total items: " + itemAmount);
     }
 }
 
