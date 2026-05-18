@@ -6,13 +6,15 @@ public class PlayerMovement : MonoBehaviour
     public float jumpHeight = 0.5f;
     public float g = 9;
     public float airControl = 0.5f;
-    public float maxFallSpeed = 1;
+    public float maxFallSpeed = 50;
+    public float sprintSpeedMultiplier = 2f;
 
     CharacterController characterController;
 
     float inputX, inputZ;
 
     Vector3 moveVelocity;
+    float TimeFalling;
 
     private void Start()
     {
@@ -26,15 +28,30 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         Vector3 movement = transform.right * inputX + transform.forward * inputZ;
+        movement.Normalize();
+
         moveVelocity.x = movement.x * moveSpeed;
         moveVelocity.z = movement.z * moveSpeed;
+
+        moveVelocity.y -= g * Time.deltaTime;
+        if (characterController.isGrounded) moveVelocity.y = 0;
+
         if (characterController.isGrounded && Input.GetKey(KeyCode.Space))
         {
             moveVelocity.y = Mathf.Sqrt(jumpHeight * 2f * g);
         }
-        moveVelocity.y -= g*Time.deltaTime;
-        //
+
+        if(Input.GetKey(KeyCode.LeftShift))
+        {
+            moveVelocity.x *= sprintSpeedMultiplier;
+            moveVelocity.z *= sprintSpeedMultiplier;
+        }
+
         moveVelocity.y = Mathf.Clamp(moveVelocity.y, -maxFallSpeed, Mathf.Infinity);
-        characterController.Move(moveVelocity * Time.deltaTime);
+        characterController.Move(moveVelocity*Time.deltaTime);
+    }
+    public Vector3 getMoveVelocity()
+    {
+        return moveVelocity;
     }
 }
