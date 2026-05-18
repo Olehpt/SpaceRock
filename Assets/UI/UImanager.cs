@@ -3,11 +3,13 @@ using TMPro;
 public class UImanager : MonoBehaviour
 {
     GameObject currentMenu = null;
+    public bool isDeathScreenActive = false;
     public GameObject PauseMenu;
     public GameObject UI;
     public GameObject Hint;
     public GameObject NavigationUI;
     public GameObject InventoryUI;
+    public GameObject DeathScreenUI;
     public TMP_Text counterItems, counterPickedUp;
     void UnlockCursor()
     {
@@ -29,6 +31,10 @@ public class UImanager : MonoBehaviour
     }
     void Update()
     {
+        if (isDeathScreenActive)
+        {
+            return;
+        }
         if (currentMenu != null)
         {
             if (Input.GetKeyDown(KeyCode.Escape))
