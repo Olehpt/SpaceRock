@@ -5,6 +5,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     int itemAmount = 0;
     int nonSavedItemAmount = 0;
+    int batteries = 0;
     private void Awake()
     {
         if (Instance == null)
@@ -39,6 +40,7 @@ public class GameManager : MonoBehaviour
     {
         itemAmount += nonSavedItemAmount;
         nonSavedItemAmount = 0;
+        batteries = 0;
         SaveManager.Save(itemAmount);
         Debug.Log("Game saved. Total items: " + itemAmount);
     }
@@ -51,6 +53,7 @@ public class GameManager : MonoBehaviour
     public void ResetTempProgress()
     {
         nonSavedItemAmount = 0;
+        batteries = 0;
     }
     public int GetItemAmount()
     {
@@ -60,5 +63,27 @@ public class GameManager : MonoBehaviour
     {
         return nonSavedItemAmount;
     }
+    public void PickUpBattery()
+    {
+        batteries++;
+        Debug.Log("Battery picked up. Total batteries: " + batteries);
+    }
+    public int GetBatteryCount()
+    {
+        return batteries;
+    }
+    public void UseBattery()
+    {
+        if (batteries > 0)
+        {
+            batteries--;
+            Debug.Log("Battery used. Remaining batteries: " + batteries);
+        }
+        else
+        {
+            Debug.Log("No batteries left to use.");
+        }
+    }
+
 }
 
